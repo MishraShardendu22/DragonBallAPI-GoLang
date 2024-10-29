@@ -11,7 +11,7 @@ import (
 )
 
 func ConnectToDataBase() *mongo.Collection {
-	fmt.Println("Connecting To The Database !!")
+	fmt.Println("Trying To Connect To The Database !!")
 
 	mongoURI := os.Getenv("MONGO_URI")
 	if mongoURI == "" {
@@ -31,5 +31,6 @@ func ConnectToDataBase() *mongo.Collection {
 	}
 
 	// Return the connection to the desired collection
+	fmt.Println("Connected to the Database !!")
 	return client.Database("DrStone").Collection("DrStone")
 }
