@@ -5,10 +5,10 @@ import (
 	"os"
 
 	"github.com/ShardenduMishra22/DrStoneAPI/database"
-	"github.com/gofiber/fiber/v2/middleware/cors"
-	"go.mongodb.org/mongo-driver/mongo"
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/joho/godotenv"
+	"go.mongodb.org/mongo-driver/mongo"
 )
 
 var collection *mongo.Collection
@@ -16,39 +16,52 @@ var collection *mongo.Collection
 func main() {
 	fmt.Println("This is a DrStone API")
 
-	// Creating a new Fiber instance for an Application
 	app := fiber.New()
+	
+	// Setting Up CORS to allow all origins
+	SettingUpCORS(app)
+	
+	// Load environment variables
+	loadEnvVariables()
 
-	// Setting up CORS
+	// Connect to the database
+	collection = database.ConnectToDataBase()
+
+	// Setup test routes
+	TestRoute(app)
+
+	// Start the server
+	startServer(app)
+}
+
+func SettingUpCORS(app *fiber.App){
 	app.Use(cors.New(cors.Config{
 		AllowOrigins: "*",
 		AllowMethods: "GET,POST,PATCH,PUT,DELETE",
 	}))
+}
 
-	// Loading .env file in Development mode
+func loadEnvVariables() {
 	if os.Getenv("ENV") != "production" {
-		err := godotenv.Load(".env")
-		if err != nil {
+		if err := godotenv.Load(".env"); err != nil {
 			fmt.Println("Error loading .env file")
 		}
 	}
+}
 
-	// Connecting to Database
-	collection = database.ConnectToDataBase()
-
-	// Test Routes
+func TestRoute(app *fiber.App) {
 	app.Get("/", func(c *fiber.Ctx) error {
-		return c.Status(200).JSON(fiber.Map{"message": "Hello, World!"})
+		return c.Status(200).JSON(fiber.Map{"message": "This is a Sample Test Route for Dr. Stone API"})
 	})
+}
 
-	// Listening to port
-	Port := os.Getenv("PORT")
-	if Port == "" {
-		Port = "3000"
+func startServer(app *fiber.App) {
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "3000"
 	}
-
-	fmt.Println("Listening to port: " + Port)
-	if err := app.Listen("0.0.0.0:" + Port); err != nil {
+	fmt.Println("Listening to port: " + port)
+	if err := app.Listen("0.0.0.0:" + port); err != nil {
 		fmt.Println("Error starting server:", err)
 	}
 }
