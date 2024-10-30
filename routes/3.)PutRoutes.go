@@ -11,10 +11,10 @@ import (
 
 func SetupPutRoutes(app *fiber.App, coll *mongo.Collection) {
 	collection = coll
-	app.Put("/api/question/:QuestionNumber", UpdateQuestion)
+	app.Put("/api/question/:QuestionNumber", ReplaceQuestion)
 }
 
-func UpdateQuestion(c *fiber.Ctx) error {
+func ReplaceQuestion(c *fiber.Ctx) error {
 	questionID := c.Params("QuestionNumber")
 	questionNumber, err := strconv.Atoi(questionID)
 	HandleError(err)
