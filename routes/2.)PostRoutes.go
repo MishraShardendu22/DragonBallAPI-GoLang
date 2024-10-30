@@ -17,16 +17,23 @@ func AddQuestion(c *fiber.Ctx) error {
 	err := c.BodyParser(&qn)
 	HandleError(err)
 
-	if qn.Rating < 0 {
+	// Set default values
+	if qn.Rating < 0 || qn.Rating > 100 {
 		qn.Rating = 50
 	}
-
 	if qn.Difficulty == "" {
-		qn.Difficulty = "Medium"
+		qn.Difficulty = "medium"
+	}
+
+	if len(qn.Question) == 0 {
+		return c.Status(400).JSON(fiber.Map{"error": "Question field cannot be empty"})
+	}
+	if len(qn.Answer) == 0 {
+		return c.Status(400).JSON(fiber.Map{"error": "Answer field cannot be empty"})
 	}
 
 	_, err = collection.InsertOne(context.Background(), qn)
 	HandleError(err)
 
-	return c.Status(200).JSON(fiber.Map{"message" : qn})
+	return c.Status(201).JSON(fiber.Map{"message": qn})
 }
