@@ -1,6 +1,6 @@
 module github.com/ShardenduMishra22/DrStoneAPI
 
-go 1.23.2
+go 1.23.0
 
 require (
 	github.com/gofiber/fiber/v2 v2.52.5
