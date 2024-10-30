@@ -30,27 +30,19 @@ func SendToDataBase(collection *mongo.Collection) {
 	}
 
 	file, err := os.Open("routes/dr_stone_questions_dataset.json")
-	if err != nil {
-		panic(err)
-	}
+	HandleError(err)
 	defer file.Close()
 
 	bytes, err := io.ReadAll(io.Reader(file))
-	if err != nil {
-		panic(err)
-	}
+	HandleError(err)
 
 	var questions []Question
 	err = json.Unmarshal(bytes, &questions)
-	if err != nil {
-		panic(err)
-	}
+	HandleError(err)
 
 	for _, question := range questions {
 		_, err := collection.InsertOne(context.TODO(), question)
-		if err != nil {
-			panic(err)
-		}
+		HandleError(err)
 	}
 
 	fmt.Println("Questions added to database")
@@ -58,10 +50,7 @@ func SendToDataBase(collection *mongo.Collection) {
 
 func IsCollectionEmpty(collection *mongo.Collection) bool {
 	count, err := collection.CountDocuments(context.Background(), bson.D{})
-	if err != nil {
-		fmt.Println("Error counting documents:", err)
-		return false
-	}
+	HandleError(err)
 	return count == 0
 }
 
