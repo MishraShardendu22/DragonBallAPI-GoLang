@@ -16,6 +16,3 @@ You can access the API here: [DragonBall API - Go Version](https://dragonballapi
 
 ## Usage
 Integrate this API with your frontend to bring dynamic DragonBall data to your application. You can use it for creating apps, dashboards, or any project that needs DragonBall information.
-
-## Endpoints
-> Include endpoints and descriptions here for quick reference.
