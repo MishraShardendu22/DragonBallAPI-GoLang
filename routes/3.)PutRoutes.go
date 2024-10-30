@@ -6,5 +6,11 @@ import (
 )
 
 func SetupPutRoutes(app *fiber.App, coll *mongo.Collection){
-	// collection = coll
+	collection = coll
+	// app.Put("/api/question/:id", UpdateQuestion)
 }
+
+// func UpdateQuestion(c *fiber.Ctx)error {
+// 	id := c.Params("id")
+	
+// }

@@ -15,7 +15,7 @@ import (
 
 type Question struct {
 	ID             primitive.ObjectID `bson:"_id,omitempty" json:"id,omitempty"`
-	QuestionNumber int                `bson:"question_number,omitempty" json:"question_number,omitempty"`
+	Question_Number int                `bson:"question_number" json:"question_number"`
 	Difficulty     string             `bson:"difficulty" json:"difficulty"`
 	Rating         int                `bson:"rating" json:"rating"`
 	Question       string             `bson:"question" json:"question"`
@@ -41,7 +41,7 @@ func SendToDataBase(collection *mongo.Collection) {
 	HandleError(err)
 
 	for _, question := range questions {
-		_, err := collection.InsertOne(context.TODO(), question)
+		_, err := collection.InsertOne(context.Background(), question)
 		HandleError(err)
 	}
 
