@@ -24,8 +24,12 @@ func main() {
 	// Load environment variables
 	loadEnvVariables()
 
-	// Connect to the database
+	// Connect to the database Start
 	collection = database.ConnectToDataBase()
+	// Connect to the database End
+
+	// Setting Up All Get Routes Start
+	// Setting Up All Get Routes End
 
 	// Setup test routes
 	TestRoute(app)
