@@ -19,18 +19,13 @@ func UpdateQuestion(c *fiber.Ctx) error {
 	questionNumber, err := strconv.Atoi(questionNumberStr) // Convert to integer
 	HandleError(err)
 
-	// Parse the request body into a map
 	var updateData map[string]interface{}
 	err = c.BodyParser(&updateData)
 	HandleError(err)
 
-	// Create a filter to find the question by question_number
 	filter := bson.M{"question_number": questionNumber}
-
-	// Prepare the update operation
 	update := bson.M{"$set": updateData}
 
-	// Apply the update to the MongoDB document
 	_, err = collection.UpdateOne(context.Background(), filter, update)
 	HandleError(err)
 

@@ -6,5 +6,15 @@ import (
 )
 
 func SetupDeleteRoutes(app *fiber.App, coll *mongo.Collection){
-	// collection = coll
+	collection = coll
+	app.Delete("/api/question/:QuestionNumber", DeleteQuestion)
+	app.Delete("/api/delete_all", DeleteAll)
+}
+
+func DeleteQuestion(c *fiber.Ctx) error {
+	
+}
+
+func DeleteAll(c *fiber.Ctx) error {
+
 }
