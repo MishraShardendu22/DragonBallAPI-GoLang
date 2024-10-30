@@ -4,6 +4,7 @@ import (
 	"context"
 
 	"github.com/gofiber/fiber/v2"
+	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
@@ -16,6 +17,10 @@ func AddQuestion(c *fiber.Ctx) error {
 	var qn Question
 	err := c.BodyParser(&qn)
 	HandleError(err)
+
+	length, err := collection.CountDocuments(context.Background(), bson.M{})
+	HandleError(err)
+	qn.Question_Number = int(length) + 1
 
 	// Set default values
 	if qn.Rating < 0 || qn.Rating > 100 {

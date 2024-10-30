@@ -7,7 +7,7 @@ import (
 
 func SetupPutRoutes(app *fiber.App, coll *mongo.Collection){
 	collection = coll
-	// app.Put("/api/question/:id", UpdateQuestion)
+	// app.Put("/api/question/:QuestionNumber", UpdateQuestion)
 }
 
 // func UpdateQuestion(c *fiber.Ctx)error {
