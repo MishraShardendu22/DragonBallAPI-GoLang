@@ -65,6 +65,13 @@ func IsCollectionEmpty(collection *mongo.Collection) bool {
 	return count == 0
 }
 
+func HandleError(err error) {
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println("There was no error!!")
+}
+
 // Both bson.D and bson.M work for filtering documents in MongoDB, but they serve slightly different purposes:
 
 // bson.D is an ordered representation, which stores the filter as a slice of key-value pairs. It’s preferred when the order of fields matters, which can sometimes be important, especially for complex queries and MongoDB commands that care about field order.
