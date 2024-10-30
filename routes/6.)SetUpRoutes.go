@@ -29,7 +29,7 @@ func SendToDataBase(collection *mongo.Collection) {
 		return
 	}
 
-	file, err := os.Open("routes/dr_stone_questions_dataset.json")
+	file, err := os.Open("routes/DragonBallAPI.json")
 	HandleError(err)
 	defer file.Close()
 
