@@ -5,6 +5,7 @@ import (
 	"os"
 
 	"github.com/ShardenduMishra22/DrStoneAPI/database"
+	"github.com/ShardenduMishra22/DrStoneAPI/routes"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/joho/godotenv"
@@ -17,19 +18,30 @@ func main() {
 	fmt.Println("This is a DrStone API")
 
 	app := fiber.New()
-	
+
 	// Setting Up CORS to allow all origins
 	SettingUpCORS(app)
-	
+
 	// Load environment variables
 	loadEnvVariables()
 
 	// Connect to the database Start
 	collection = database.ConnectToDataBase()
+	fmt.Println(collection)
+	routes.SendToDataBase(collection)
 	// Connect to the database End
 
-	// Setting Up All Get Routes Start
-	// Setting Up All Get Routes End
+
+	// Setting Up All Routes Start
+
+	routes.SetupGetRoutes(app, collection)
+	routes.SetupPostRoutes(app, collection)
+	routes.SetupPutRoutes(app, collection)
+	routes.SetupPatchRoutes(app, collection)
+	routes.SetupDeleteRoutes(app, collection)
+
+	// Setting Up All Routes End
+
 
 	// Setup test routes
 	TestRoute(app)
@@ -38,7 +50,7 @@ func main() {
 	startServer(app)
 }
 
-func SettingUpCORS(app *fiber.App){
+func SettingUpCORS(app *fiber.App) {
 	app.Use(cors.New(cors.Config{
 		AllowOrigins: "*",
 		AllowMethods: "GET,POST,PATCH,PUT,DELETE",
