@@ -27,4 +27,6 @@ func AddQuestion(c *fiber.Ctx) error {
 
 	_, err = collection.InsertOne(context.Background(), qn)
 	HandleError(err)
+
+	return c.Status(200).JSON(fiber.Map{"message" : qn})
 }
