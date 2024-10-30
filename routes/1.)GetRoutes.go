@@ -69,10 +69,3 @@ func GetQuestionByDifficulty(c *fiber.Ctx) error {
 
 	return c.Status(200).JSON(qns)
 }
-
-func HandleError(err error) {
-	if err != nil {
-		panic(err)
-	}
-	fmt.Println("There was no error!!")
-}
