@@ -1,6 +1,5 @@
 # DragonBall API (Go Version)
 
-
 This is a self-made DragonBall API with a Go backend. It's free to use and can be integrated with any frontend for applications of your choice. This is an advanced version of the previous **DragonBall API**, which was made with a TypeScript backend.
 
 ## Demo
