@@ -2,7 +2,7 @@
 This is a self-made DragonBall API with a Go backend. It's free to use and can be integrated with any frontend for applications of your choice. This is an advanced version of the previous **DragonBall API**, which was made with a TypeScript backend.
 
 ## Demo
-You can access the API here: [DragonBall API - Go Version](https://dragonballapi-golang.onrender.com)
+You can access the API here: [DragonBall API - Go Version](https://dragonballapi-golang-1qjq.onrender.com)
 
 ## Features
 - Fully functional API providing data for DragonBall characters, arcs, and episodes.
